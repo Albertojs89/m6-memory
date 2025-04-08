@@ -13,7 +13,7 @@ export default function Header() {
           <li><a href="/about">About</a></li>
           <li>
             <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" />
+              <AvatarImage src="/JessYBruma.png" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
           </li>
