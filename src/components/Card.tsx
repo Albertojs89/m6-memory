@@ -6,7 +6,7 @@ export default function Card({ image, onClick, isFlipped, clickCount }) {
   return (
     <div
       onClick={onClick}
-      className="w-24 h-32 cursor-pointer [perspective:1000px]"
+      className="w-44 h-52 cursor-pointer [perspective:1000px]"
     >
       <div
         className={`relative w-full h-full transition-transform duration-500 [transform-style:preserve-3d] ${
