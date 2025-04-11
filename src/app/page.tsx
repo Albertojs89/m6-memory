@@ -1,12 +1,11 @@
-import Image from "next/image";
+"use client";
+
+import Tablero from "@/components/Tablero";
 
 export default function Home() {
   return (
-    <>
-    <div className="bg-gray-600 w-full h-screen flex justify-center">
-      <h1>MEMORY</h1>
+    <div className="bg-gray-600 min-h-screen w-full overflow-auto">
+      <Tablero />
     </div>
-    </>
-    
   );
 }
