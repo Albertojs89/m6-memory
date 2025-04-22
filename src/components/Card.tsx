@@ -2,7 +2,9 @@
 
 import Image from "next/image";
 
-export default function Card({ image, onClick, isFlipped, clickCount }) {
+export default function Card(props: any) {
+  const { image, onClick, isFlipped, clickCount } = props;
+
   return (
     <div
       onClick={onClick}
