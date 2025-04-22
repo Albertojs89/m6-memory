@@ -30,7 +30,7 @@ function shuffleArray(array: any[]) {
 // Bloque 4: Componente principal del tablero de juego
 export default function Tablero() {
   // Bloque 4.1: Estados del juego
-  const [cards, setCards] = useState([]);                // Cartas del tablero
+  const [cards, setCards] = useState<any[]>([]);// Cartas del tablero
   const [selected, setSelected] = useState([]);          // Índices de cartas seleccionadas
   const [clicks, setClicks] = useState(0);               // Total de clics realizados
   const [matches, setMatches] = useState(0);             // Total de coincidencias encontradas
