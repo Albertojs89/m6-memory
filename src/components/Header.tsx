@@ -1,5 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-
+import Link from "next/link"; // al principio del archivo
 export default function Header() {
   return (
     <header className="flex justify-between items-center p-4 bg-gray-800 text-white">
@@ -9,8 +9,8 @@ export default function Header() {
       </div>
       <nav>
         <ul className="flex space-x-4 mr-16 gap-16">
-          <li><a href="/">Home</a></li>
-          <li><a href="/about">About</a></li>
+          <li><Link href="/">Home</Link></li>
+          <li><Link href="/about">About</Link></li>
           <li>
             <Avatar>
               <AvatarImage src="/JessYBruma.png" />
