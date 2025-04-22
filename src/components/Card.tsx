@@ -2,10 +2,15 @@
 import React from "react";
 import Image from "next/image";
 
-export default function Card({ image, onClick, isFlipped, clickCount }: { [key: string]: any }) {
-  const { image, onClick, isFlipped, clickCount } = props;
+// 👇 Declaramos los props sin tipar realmente (usamos "any")
+interface Props {
+  image: any;
+  onClick: any;
+  isFlipped: any;
+  clickCount: any;
+}
 
-
+export default function Card({ image, onClick, isFlipped, clickCount }: Props) {
   return (
     <div
       onClick={onClick}
