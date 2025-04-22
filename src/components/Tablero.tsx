@@ -21,6 +21,8 @@ const images = [
 ];
 
 // Bloque 3: Función auxiliar para mezclar aleatoriamente las cartas
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function shuffleArray(array: any[]) {
   return [...array].sort(() => Math.random() - 0.5);
 }
@@ -56,12 +58,12 @@ export default function Tablero() {
     const updatedCards = [...cards];
     updatedCards[index].isFlipped = true;
 
-    // Actualiza los estados correspondientes
+    // Actualiza los estados correspondientes--
     setCards(updatedCards);
     setSelected((prev) => [...prev, index]);
     setClicks((prev) => prev + 1);
 
-    // Incrementa el contador individual de clics por carta
+    // Incrementa el contador individual de clics por carta--
     setClickCounts((prev) => ({
       ...prev,
       [index]: (prev[index] || 0) + 1,
