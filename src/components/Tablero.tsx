@@ -51,7 +51,8 @@ export default function Tablero() {
   }, []);
 
   // Bloque 4.3: Manejador de clic sobre una carta
-  const handleClick = (index) => {
+  const handleClick = (index: number) => {
+
     // Ignora clics inválidos: ya volteada, ya emparejada o ya hay dos seleccionadas
     if (cards[index].isFlipped || cards[index].isMatched || selected.length === 2) return;
 
