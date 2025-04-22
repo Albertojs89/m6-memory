@@ -1,8 +1,8 @@
 "use client";
-
+import React from "react";
 import Image from "next/image";
 
-export default function Card(props) {
+export default function Card({ image, onClick, isFlipped, clickCount }: { [key: string]: any }) {
   const { image, onClick, isFlipped, clickCount } = props;
 
 
