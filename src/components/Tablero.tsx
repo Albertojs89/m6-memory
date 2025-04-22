@@ -21,7 +21,7 @@ const images = [
 ];
 
 // Bloque 3: Función auxiliar para mezclar aleatoriamente las cartas
-function shuffleArray(array) {
+function shuffleArray(array: any[]) {
   return [...array].sort(() => Math.random() - 0.5);
 }
 
