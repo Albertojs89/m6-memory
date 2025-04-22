@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 
-// 👇 Declaramos los props sin tipar realmente (usamos "any")
+/* eslint-disable @typescript-eslint/no-explicit-any */
 interface Props {
   image: any;
   onClick: any;
