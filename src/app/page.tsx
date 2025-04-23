@@ -1,9 +1,45 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Tablero from "@/components/Tablero";
 
 export default function Home() {
   const [mostrarTablero, setMostrarTablero] = useState(false);
+  const [tiempoRestante, setTiempoRestante] = useState(20);
+  const [mostrarMensajeTiempoAgotado, setMostrarMensajeTiempoAgotado] = useState(false);
+
+  useEffect(() => {
+    let timer: ReturnType<typeof setInterval>;
+    let timeout: ReturnType<typeof setTimeout>;
+
+    if (mostrarTablero) {
+      setTiempoRestante(20); // reiniciar tiempo cada vez que empieza
+      setMostrarMensajeTiempoAgotado(false);
+
+      timer = setInterval(() => {
+        setTiempoRestante((prev) => {
+          if (prev <= 1) {
+            clearInterval(timer);
+            setMostrarMensajeTiempoAgotado(true);
+
+            // Espera un segundo y vuelve al inicio
+            timeout = setTimeout(() => {
+              setMostrarTablero(false);
+              setMostrarMensajeTiempoAgotado(false);
+            }, 1000);
+
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+
+    // Limpiar intervalos si se desmonta o cambia el estado
+    return () => {
+      clearInterval(timer);
+      clearTimeout(timeout);
+    };
+  }, [mostrarTablero]);
 
   return (
     <div className="relative min-h-screen w-full overflow-auto">
@@ -29,7 +65,17 @@ export default function Home() {
             </button>
           </>
         ) : (
-          <Tablero />
+          <>
+            <Tablero />
+            <div className="mt-6 text-xl font-bold">
+              Tiempo restante: {tiempoRestante} segundos
+            </div>
+            {mostrarMensajeTiempoAgotado && (
+              <div className="mt-4 text-red-500 font-bold text-lg animate-pulse">
+                 ¡Tiempo agotado! Reiniciando...
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>
