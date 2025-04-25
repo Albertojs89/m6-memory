@@ -8,16 +8,16 @@ import Card from "./Card";
 const images = [
   "/images/charmander.jpg",
   "/images/charmander.jpg",
-  "/images/charmander.jpg",
-  "/images/charmander.jpg",
+  "/images/squirtle.jpg",
+  "/images/squirtle.jpg",
   "/images/pikachu.jpg",
   "/images/pikachu.jpg",
-  "/images/pikachu.jpg",
-  "/images/pikachu.jpg",
+  "/images/evee.jpg",
+  "/images/evee.jpg",
   "/images/burbasur.jpg",
   "/images/burbasur.jpg",
-  "/images/burbasur.jpg",
-  "/images/burbasur.jpg",
+  "/images/charizard.jpg",
+  "/images/charizard.jpg",
 ];
 
 // Bloque 3: Función auxiliar para mezclar aleatoriamente las cartas
