@@ -1,7 +1,13 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-  /* config options here */
+
+//configuración de next.js para permitir cargar imágenes desde un dominio específico
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  images: {
+    domains: ['raw.githubusercontent.com'],
+  },
 };
 
 export default nextConfig;
+
