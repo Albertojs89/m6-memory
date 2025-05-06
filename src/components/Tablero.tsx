@@ -35,7 +35,7 @@ export default function Tablero() {
   const [clicks, setClicks] = useState<number>(0); // Total de clics
   const [matches, setMatches] = useState<number>(0); // Total de matches
   const [clickCounts, setClickCounts] = useState<{ [key: number]: number }>({}); // Clics individuales por carta
-
+  
 
   // Bloque 4.2: Inicialización del juego al montar el componente
   useEffect(() => {
