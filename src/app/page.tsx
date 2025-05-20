@@ -12,7 +12,7 @@ export default function Home() {
     let timeout: ReturnType<typeof setTimeout>;
 
     if (mostrarTablero) {
-      setTiempoRestante(20); // reiniciar tiempo cada vez que empieza
+      setTiempoRestante(40); // reiniciar tiempo cada vez que empieza
       setMostrarMensajeTiempoAgotado(false);
 
       timer = setInterval(() => {
