@@ -1,7 +1,6 @@
-// app/login/page.tsx
-"use client";
+'use client'
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
@@ -10,53 +9,62 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      const { email: storedEmail, password: storedPassword } = JSON.parse(storedUser);
-      if (email === storedEmail && password === storedPassword) {
-        router.push("/");
-      }
-    }
-  }, []);
-
-  const handleLogin = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const storedUser = localStorage.getItem("user");
 
-    if (storedUser) {
-      const { email: storedEmail, password: storedPassword } = JSON.parse(storedUser);
-      if (email === storedEmail && password === storedPassword) {
-        localStorage.setItem("loggedIn", "true");
-        router.push("/");
-      } else {
-        setError("Email o contraseña incorrectos.");
+    try {
+      const res = await fetch("https://m7-laravel-production.up.railway.app/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.message || "Error al iniciar sesión");
+        return;
       }
-    } else {
-      setError("No hay ningún usuario registrado.");
+
+      // Guardamos el token y usuario en localStorage
+      localStorage.setItem("auth_token", data.access_token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+
+      
+      // Recargamos la página para que el Header lea el estado
+      window.location.href = "/";
+
+
+    } catch (err) {
+      setError("Error de conexión");
+      console.error(err);
     }
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white px-4">
-      <h1 className="text-3xl font-bold mb-6">Login</h1>
-      <form onSubmit={handleLogin} className="flex flex-col gap-4 w-full max-w-sm">
+    <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
+      <form onSubmit={handleSubmit} className="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-md space-y-4">
+        <h2 className="text-2xl font-bold mb-4 text-center">Iniciar sesión</h2>
+        {error && <p className="text-red-400">{error}</p>}
         <input
           type="email"
-          placeholder="Email"
+          placeholder="Correo electrónico"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="p-3 rounded bg-gray-800 border border-gray-700 text-white"
+          className="w-full p-2 rounded bg-gray-700 text-white"
+          required
         />
         <input
           type="password"
           placeholder="Contraseña"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="p-3 rounded bg-gray-800 border border-gray-700 text-white"
+          className="w-full p-2 rounded bg-gray-700 text-white"
+          required
         />
-        {error && <p className="text-red-500 text-sm">{error}</p>}
-        <button type="submit" className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded">
+        <button type="submit" className="w-full bg-green-600 hover:bg-green-700 p-2 rounded">
           Entrar
         </button>
       </form>
