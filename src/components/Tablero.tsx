@@ -105,6 +105,42 @@ export default function Tablero() {
     }
   }, [selected]);
 
+  // Bloque 3.5: Guardar partida cuando completes todos los matches
+    useEffect(() => {
+      if (matches === 6) {
+        const saveGame = async () => {
+          try {
+            const token = localStorage.getItem("auth_token");
+            if (!token) return; // No guardamos si no está logeado
+
+            const res = await fetch("https://m7-laravel-production.up.railway.app/api/games", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+              body: JSON.stringify({
+                puntuacion: matches,
+                clics: clicks,
+              }),
+            });
+
+            if (!res.ok) {
+              const data = await res.json();
+              console.error("Error al guardar la partida:", data.message || "Error");
+            } else {
+              console.log("Partida guardada correctamente!");
+            }
+          } catch (err) {
+            console.error("Error de red:", err);
+          }
+        };
+
+        saveGame();
+      }
+    }, [matches, clicks]);
+
+
   // Bloque 4: Renderizado del componente
   return (
     <div className="flex flex-col items-center mt-8">
